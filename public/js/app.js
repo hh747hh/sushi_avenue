@@ -1,1 +1,7 @@
-console.log("Hey, I am here!");
+"use strict";
+
+(function(){
+  angular
+  .module("sushiAvenue", []);
+
+})();

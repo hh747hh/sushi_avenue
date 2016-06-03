@@ -1,0 +1,20 @@
+{
+  "name": "tag_anything",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Woo Yun <hh747hh@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/hh747hh/sushi_avenue",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.6"
+  }
+}
