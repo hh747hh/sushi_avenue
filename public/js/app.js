@@ -6,21 +6,42 @@
     "ui.router"
 
   ])
-  .config(Router);
+  .config(Router)
+  .controller("productsIndexController", productsIndexCtrl)
+  .controller("productsShowController", productsShowCtrl);
 
   Router.$inject = ["$stateProvider", "$locationProvider", "$urlRouterProvider"];
   function Router($stateProvider, $locationProvider,$urlRouterProvider){
     $locationProvider.html5Mode(true);
     $stateProvider
-    .state("main",{
-      url: "/",
-      template: "<h2>This is working<h2>"
+    .state("productsIndex",{
+      url:          "/",
+      templateUrl:     "/html/products-index.html",
+      controller:   "productsIndexController",
+      controllerAs: "pIndexVM"
     })
-    .state("test", {
-      url: "/test",
-      template: "<h2> How can we help you?</h2>"
+    .state("productsShow", {
+      url:            "/products/:name",
+      templateUrl:    "/html/products-show.html",
+      controller:     "productsShowController",
+      controllerAs:   "pShowVM"
     });
     $urlRouterProvider.otherwise("/");
   }
 
+
+  function productsIndexCtrl(){
+    var vm = this;
+    vm.products = [
+      {name: "Product1"},
+      {name: "Product2"},
+      {name: "Product3"}
+
+    ];
+  }
+  productsShowCtrl.$inject = ["$stateParams"];
+  function productsShowCtrl($stateParams){
+    var vm        = this;
+    vm.product    = $stateParams;
+  }
 })();

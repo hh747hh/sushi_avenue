@@ -1,0 +1,7 @@
+<h2>Hello, {{pIndexVM.products.length}} menu!</h2>
+
+<ul>
+  <li data-ng-repeat="product in pIndexVM.products">
+    <a data-ui-sref="productsShow(product)">{{product.name}}</a>
+  </li>
+</ul>
