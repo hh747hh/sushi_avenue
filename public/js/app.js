@@ -3,12 +3,15 @@
 (function(){
   angular
   .module("sushiAvenue", [
-    "ui.router"
+    "ui.router",
+    "ngResource"
 
   ])
   .config(Router)
+  .factory("Product", productFactory)
   .controller("productsIndexController", productsIndexCtrl)
-  .controller("productsShowController", productsShowCtrl);
+  .controller("productsShowController", productsShowCtrl)
+
 
   Router.$inject = ["$stateProvider", "$locationProvider", "$urlRouterProvider"];
   function Router($stateProvider, $locationProvider,$urlRouterProvider){
@@ -29,15 +32,16 @@
     $urlRouterProvider.otherwise("/");
   }
 
+  productFactory.$inject = ["$resource"];
+  function productFactory($resource){
+    var Product = $resource("/api/products");
+    return Product;
+  }
 
-  function productsIndexCtrl(){
+  productsIndexCtrl.$inject = ["Product"];
+  function productsIndexCtrl(Product){
     var vm = this;
-    vm.products = [
-      {name: "Product1"},
-      {name: "Product2"},
-      {name: "Product3"}
-
-    ];
+    vm.products = Product.query();
   }
   productsShowCtrl.$inject = ["$stateParams"];
   function productsShowCtrl($stateParams){
